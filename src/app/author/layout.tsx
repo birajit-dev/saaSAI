@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FiBarChart2, FiFeather, FiChevronLeft, FiChevronRight, FiUser, FiSettings, FiLogOut } from 'react-icons/fi';
+import { FiBarChart2, FiFeather, FiChevronLeft, FiChevronRight, FiUser, FiSettings, FiLogOut, FiImage, FiFolder } from 'react-icons/fi';
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -25,6 +25,18 @@ const menuItems: MenuItem[] = [
     name: 'Create Post', 
     icon: <FiFeather />, 
     href: '/author/create-post',
+    category: 'Content'
+  },
+  {
+    name: 'Photo Manager',
+    icon: <FiImage />,
+    href: '/author/photo-manager',
+    category: 'Content'
+  },
+  {
+    name: 'File Manager',
+    icon: <FiFolder />,
+    href: '/author/file-manager', 
     category: 'Content'
   },
   { 
