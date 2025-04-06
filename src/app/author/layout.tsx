@@ -24,7 +24,7 @@ const menuItems: MenuItem[] = [
   { 
     name: 'Create Post', 
     icon: <FiFeather />, 
-    href: '/author/create-post',
+    href: '/author/news-ai/create',
     category: 'Content'
   },
   {

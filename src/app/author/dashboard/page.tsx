@@ -149,10 +149,7 @@ export default function AuthorDashboard() {
             <FiCpu className="h-4 w-4" />
             Create with AI
           </Button>
-          <Button onClick={() => router.push('/author/articles/new')} className="gap-2">
-            <FiPlusCircle className="h-4 w-4" />
-            New Article
-          </Button>
+          
         </div>
       </div>
 

@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FiBarChart2, FiFolder, FiCalendar, FiMail, FiCheckCircle, FiSettings, FiLogOut, FiFeather, FiChevronLeft, FiChevronRight, FiImage, FiCpu, FiFile, FiUser } from 'react-icons/fi';
+import { FiBarChart2, FiFolder, FiCalendar, FiMail, FiCheckCircle, FiSettings, FiLogOut, FiFeather, FiChevronLeft, FiChevronRight, FiImage, FiCpu, FiFile, FiUser, FiBell, FiUsers } from 'react-icons/fi';
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-
-
 
 interface MenuItem {
   name: string;
@@ -75,6 +73,18 @@ const menuItems: MenuItem[] = [
     badge: 3,
     category: 'Communication'
   },
+  {
+    name: 'Push Notifications',
+    icon: <FiBell />,
+    href: '/users/push-notifications',
+    category: 'Communication'
+  },
+  {
+    name: 'Subscribers',
+    icon: <FiUsers />,
+    href: '/users/subscriber',
+    category: 'Management'
+  },
   { 
     name: 'Settings', 
     icon: <FiSettings />, 
@@ -128,10 +138,6 @@ export default function UsersLayout({ children }: UsersLayoutProps) {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
-
-
-
-
   useEffect(() => {
     const storedUsername = localStorage.getItem('saasUser');
     setUsername(storedUsername);
@@ -147,7 +153,6 @@ export default function UsersLayout({ children }: UsersLayoutProps) {
   }, {} as Record<string, MenuItem[]>);
 
   return (
-      
     <div className="flex h-screen bg-background">
       <motion.aside
         initial={{ width: sidebarOpen ? 240 : 72 }}
@@ -221,7 +226,6 @@ export default function UsersLayout({ children }: UsersLayoutProps) {
       </motion.aside>
 
       <main className="flex-1 overflow-y-auto p-5">
-
         <ScrollArea className="h-full rounded-lg bg-white shadow-sm">
           <div className="container py-6">
             {children}
@@ -229,6 +233,5 @@ export default function UsersLayout({ children }: UsersLayoutProps) {
         </ScrollArea>
       </main>
     </div>
-
   );
 }
