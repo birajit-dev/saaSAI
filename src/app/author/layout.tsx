@@ -30,13 +30,13 @@ const menuItems: MenuItem[] = [
   {
     name: 'Photo Manager',
     icon: <FiImage />,
-    href: '/author/photo-manager',
+    href: '/author/photo-management',
     category: 'Content'
   },
   {
     name: 'File Manager',
     icon: <FiFolder />,
-    href: '/author/file-manager', 
+    href: '/author/file-management', 
     category: 'Content'
   },
   { 
