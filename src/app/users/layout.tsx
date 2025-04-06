@@ -161,7 +161,7 @@ export default function UsersLayout({ children }: UsersLayoutProps) {
               {sidebarOpen && (
                 <div className="flex items-center space-x-2">
                   <img src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/images/1743926946350-kokthum.png`} alt="Company Logo" className="h-8 w-8 rounded-full shadow-lg" />
-                  <span className="text-lg font-semibold text-blue-600">Company Name</span>
+                  <span className="text-lg font-semibold text-blue-600">Kokthum</span>
                 </div>
               )}
               <Button
