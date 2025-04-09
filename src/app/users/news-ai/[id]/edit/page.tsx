@@ -424,7 +424,7 @@ export default function EditNews() {
                   images_upload_base_path: '/uploads',
                   automatic_uploads: true,
                   file_picker_types: 'image',
-                  file_picker_callback: function(cb, value, meta) {
+                  file_picker_callback: function(cb: (url: string, obj?: { title: string }) => void, value: string, meta: { filetype: string }) {
                     const input = document.createElement('input');
                     input.setAttribute('type', 'file');
                     input.setAttribute('accept', 'image/*');
@@ -434,7 +434,7 @@ export default function EditNews() {
                         const reader = new FileReader();
                         reader.onload = function() {
                           const id = 'blobid' + (new Date()).getTime();
-                          const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                          const blobCache = (window as any).tinymce.activeEditor.editorUpload.blobCache;
                           const base64 = (reader.result as string).split(',')[1];
                           const blobInfo = blobCache.create(id, file, base64);
                           blobCache.add(blobInfo);
