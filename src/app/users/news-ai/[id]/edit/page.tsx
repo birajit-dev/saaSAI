@@ -401,21 +401,50 @@ export default function EditNews() {
             <div className="space-y-2">
               <Label htmlFor="post_content">Content</Label>
               <Editor
-                apiKey="ilhzf83qp53v0xyyxw6zm2279dhrlc249oam89xycth5i3nv"
+                apiKey='iuydh6tdhtzd5buaia35qxb7gxofaulliy9l2s4b2dybzp65'
                 value={news.post_content}
                 onEditorChange={handleEditorChange}
                 init={{
                   height: 500,
-                  menubar: true,
+                  menubar: false,
                   plugins: [
                     'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                     'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                     'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
                   ],
-                  toolbar: 'undo redo | blocks | ' +
-                    'bold italic forecolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | help',
+                  toolbar: 'undo redo | blocks | formatselect | ' +
+                    'bold italic | alignleft aligncenter alignright | ' +
+                    'bullist numlist outdent indent | link image | ' + 
+                    'fontsizepicker fontsize | help',
+                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                  fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+                  link_title: false,
+                  link_default_target: '_blank',
+                  images_upload_url: `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
+                  images_upload_base_path: '/uploads',
+                  automatic_uploads: true,
+                  file_picker_types: 'image',
+                  file_picker_callback: function(cb, value, meta) {
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+                    input.onchange = function() {
+                      if (input.files) {
+                        const file = input.files[0];
+                        const reader = new FileReader();
+                        reader.onload = function() {
+                          const id = 'blobid' + (new Date()).getTime();
+                          const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                          const base64 = (reader.result as string).split(',')[1];
+                          const blobInfo = blobCache.create(id, file, base64);
+                          blobCache.add(blobInfo);
+                          cb(blobInfo.blobUri(), { title: file.name });
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    };
+                    input.click();
+                  }
                 }}
               />
             </div>
