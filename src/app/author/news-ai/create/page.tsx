@@ -124,6 +124,7 @@ interface FormData {
   insight: string;
   author: string;
   prompt: string;
+  image_source: string;
 }
 
 export default function AddNews() {
@@ -138,7 +139,8 @@ export default function AddNews() {
     tags: [],
     insight: '',
     author: '',
-    prompt: ''
+    prompt: '',
+    image_source: '',
   });
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [isPreview, setIsPreview] = useState(false);
@@ -252,6 +254,7 @@ export default function AddNews() {
       formDataToSend.append('optional_2', '');
       formDataToSend.append('optional_3', '');
       formDataToSend.append('optional_4', '');
+      formDataToSend.append('image_source', formData.image_source);
       
       if (coverImage) {
         formDataToSend.append('myFile', coverImage);
@@ -380,10 +383,10 @@ export default function AddNews() {
                   plugins: [
                     'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                     'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'textcolor'
                   ],
                   toolbar: 'undo redo | blocks | formatselect | ' +
-                    'bold italic | alignleft aligncenter alignright | ' +
+                    'bold italic | forecolor backcolor alignleft aligncenter alignright | ' +
                     'bullist numlist outdent indent | link image | ' + 
                     'fontsizepicker fontsize | help',
                   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
@@ -454,6 +457,17 @@ export default function AddNews() {
                   Selected: {coverImage.name}
                 </p>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="imageSource">Image Source</Label>
+              <Input
+                id="image_source"
+                name="image_source"
+                value={formData.image_source}
+                onChange={handleChange}
+                placeholder="e.g. Unsplash, Author Name, etc."
+              />
             </div>
 
             <div className="space-y-2">

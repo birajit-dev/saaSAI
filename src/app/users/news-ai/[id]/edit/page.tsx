@@ -45,6 +45,7 @@ interface NewsItem {
   optional_4: string;
   update_date: string;
   ai_seq: number;
+  image_source: string;
 }
 
 interface TagInputProps {
@@ -172,6 +173,7 @@ export default function EditNews() {
     optional_3: '',
     optional_4: '',
     update_date: '',
+    image_source: '',
     ai_seq: 0
   });
   const [loading, setLoading] = useState(true);
@@ -388,6 +390,17 @@ export default function EditNews() {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="image_source">Image Source</Label>
+              <Input
+                id="image_source"
+                name="image_source"
+                value={news.image_source}
+                onChange={handleChange}
+                placeholder="e.g. Unsplash, Author Name, etc."
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="post_description">Description</Label>
               <Textarea
                 id="post_description"
@@ -410,10 +423,10 @@ export default function EditNews() {
                   plugins: [
                     'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                     'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'textcolor'
                   ],
                   toolbar: 'undo redo | blocks | formatselect | ' +
-                    'bold italic | alignleft aligncenter alignright | ' +
+                    'bold italic | forecolor backcolor alignleft aligncenter alignright | ' +
                     'bullist numlist outdent indent | link image | ' + 
                     'fontsizepicker fontsize | help',
                   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
